@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { BiSearch } from 'react-icons/bi';
 
@@ -9,47 +9,39 @@ import {
   SearchFormInputStyled,
 } from 'components/searchbar/SearchbarStyled.styled';
 
-export class Searchbar extends React.Component {
-  state = {
-    name: '',
+export const Searchbar = ({ onSubmit }) => {
+  const [name, setName] = useState('');
+  const inputChange = e => {
+    setName(e.target.value);
   };
-
-  ressetForm = () => {
-    this.setState({ name: '' });
-  };
-  inputChange = e => {
-    this.setState({ name: e.target.value });
-  };
-  formSubmit = e => {
+  const formSubmit = e => {
     e.preventDefault();
-    if (!this.state.name) {
+    if (!name) {
       alert('name please');
       return;
     }
-    this.props.onSubmit(this.state.name);
-    this.ressetForm();
+    onSubmit(name);
+    setName('');
   };
-  render() {
-    return (
-      <SearchbarStyled>
-        <SearchFormStyled onSubmit={this.formSubmit}>
-          <SearchFormButtonStyled type="submit">
-            <BiSearch size="35px" color="#3F00B5" />
-          </SearchFormButtonStyled>
-          <SearchFormInputStyled
-            type="text"
-            name="input"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search images and photos"
-            onChange={this.inputChange}
-            value={this.state.name}
-          />
-        </SearchFormStyled>
-      </SearchbarStyled>
-    );
-  }
-}
+  return (
+    <SearchbarStyled>
+      <SearchFormStyled onSubmit={formSubmit}>
+        <SearchFormButtonStyled type="submit">
+          <BiSearch size="35px" color="#3F00B5" />
+        </SearchFormButtonStyled>
+        <SearchFormInputStyled
+          type="text"
+          name="input"
+          autoComplete="off"
+          autoFocus
+          placeholder="Search images and photos"
+          onChange={inputChange}
+          value={name}
+        />
+      </SearchFormStyled>
+    </SearchbarStyled>
+  );
+};
 Searchbar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };

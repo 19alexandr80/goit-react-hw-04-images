@@ -1,28 +1,25 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
 import { ImageGalleryStyled } from 'components/imageGallery/ImageGalleryStyled.styled';
 
 import { ImageGalleryItem } from 'components/imageGallery/ImageGalleryItem';
 
-export class ImageGallery extends React.Component {
-  render() {
-    return (
-      <ImageGalleryStyled>
-        {this.props.list.map(({ id, webformatURL, largeImageURL }) => {
-          return (
-            <ImageGalleryItem
-              key={id}
-              url={webformatURL}
-              largeImageURL={largeImageURL}
-              toogleModal={this.props.toogleModal}
-            />
-          );
-        })}
-      </ImageGalleryStyled>
-    );
-  }
-}
+export const ImageGallery = ({ list, toogleModal }) => {
+  return (
+    <ImageGalleryStyled>
+      {list.map(({ id, webformatURL, largeImageURL }) => {
+        return (
+          <ImageGalleryItem
+            key={id}
+            url={webformatURL}
+            largeImageURL={largeImageURL}
+            toogleModal={toogleModal}
+          />
+        );
+      })}
+    </ImageGalleryStyled>
+  );
+};
 
 ImageGallery.propTypes = {
   toogleModal: PropTypes.func.isRequired,

@@ -21,7 +21,6 @@ export class App extends React.Component {
     pege: 1,
   };
 
-  // componentDidMount() {}
   async componentDidUpdate(a, b) {
     if (this.state.name !== b.name || this.state.pege !== b.pege) {
       this.setState({ status: true });
@@ -42,7 +41,6 @@ export class App extends React.Component {
       }
     }
   }
-  // componentWillUnmount() {}
   listClearing = () => {
     this.setState({
       list: [],

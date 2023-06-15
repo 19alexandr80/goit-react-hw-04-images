@@ -7,36 +7,35 @@ import {
   OverlayStyled,
 } from 'components/modal/ModalStyled.styled';
 
-export class Modal extends React.Component {
-  componentDidMount() {
-    window.addEventListener('keydown', this.closeModal);
-  }
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.closeModal);
-  }
-  closeModal = e => {
-    if (e.code === 'Escape') {
-      this.props.toogleModal();
-    }
-  };
-  toogleModal = e => {
+export const Modal = ({ toogleModal, urlModal }) => {
+  // componentDidMount() {
+  //   window.addEventListener('keydown', this.closeModal);
+  // }
+  // componentWillUnmount() {
+  //   window.removeEventListener('keydown', this.closeModal);
+  // }
+  // closeModal = e => {
+  //   if (e.code === 'Escape') {
+  //     this.props.toogleModal();
+  //   }
+  // };
+  const closedModal = e => {
     if (e.currentTarget === e.target) {
-      this.props.toogleModal();
+      toogleModal();
     }
   };
-  render() {
-    return (
-      <OverlayStyled onClick={this.toogleModal}>
-        <ModalStyled>
-          <img src={this.props.urlModal} alt="foto" />
-          <ButtonStyled type="button" onClick={this.props.toogleModal}>
-            close
-          </ButtonStyled>
-        </ModalStyled>
-      </OverlayStyled>
-    );
-  }
-}
+
+  return (
+    <OverlayStyled onClick={closedModal}>
+      <ModalStyled>
+        <img src={urlModal} alt="foto" />
+        <ButtonStyled type="button" onClick={toogleModal}>
+          close
+        </ButtonStyled>
+      </ModalStyled>
+    </OverlayStyled>
+  );
+};
 Modal.propTypes = {
   toogleModal: PropTypes.func.isRequired,
   urlModal: PropTypes.string.isRequired,
