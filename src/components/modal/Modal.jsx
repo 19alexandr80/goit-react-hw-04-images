@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { ButtonStyled } from 'components/button/ButtonStyled.styled';
@@ -8,23 +8,23 @@ import {
 } from 'components/modal/ModalStyled.styled';
 
 export const Modal = ({ toogleModal, urlModal }) => {
-  // componentDidMount() {
-  //   window.addEventListener('keydown', this.closeModal);
-  // }
-  // componentWillUnmount() {
-  //   window.removeEventListener('keydown', this.closeModal);
-  // }
-  // closeModal = e => {
-  //   if (e.code === 'Escape') {
-  //     this.props.toogleModal();
-  //   }
-  // };
+  useEffect(() => {
+    function closeModal(e) {
+      if (e.code === 'Escape') {
+        toogleModal();
+        return;
+      }
+    }
+    window.addEventListener('keydown', closeModal);
+    return () => {
+      window.removeEventListener('keydown', closeModal);
+    };
+  });
   const closedModal = e => {
     if (e.currentTarget === e.target) {
       toogleModal();
     }
   };
-
   return (
     <OverlayStyled onClick={closedModal}>
       <ModalStyled>
