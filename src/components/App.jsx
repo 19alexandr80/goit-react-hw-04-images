@@ -19,7 +19,7 @@ export const App = () => {
   const [name, setName] = useState('');
   const [pege, setPege] = useState('');
   useEffect(() => {
-    const ffff = async () => {
+    const getApi = async () => {
       if (!name) {
         return;
       }
@@ -40,7 +40,7 @@ export const App = () => {
         return;
       }
     };
-    ffff();
+    getApi();
   }, [name, pege]);
 
   const listClearing = () => {
