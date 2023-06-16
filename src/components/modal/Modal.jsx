@@ -9,19 +9,13 @@ import {
 
 export const Modal = ({ toogleModal, urlModal }) => {
   useEffect(() => {
-    function closeModal(e) {
-      if (e.code === 'Escape') {
-        toogleModal();
-        return;
-      }
-    }
-    window.addEventListener('keydown', closeModal);
+    window.addEventListener('keydown', closedModal);
     return () => {
-      window.removeEventListener('keydown', closeModal);
+      window.removeEventListener('keydown', closedModal);
     };
   });
   const closedModal = e => {
-    if (e.currentTarget === e.target) {
+    if (e.currentTarget === e.target || e.code === 'Escape') {
       toogleModal();
     }
   };
